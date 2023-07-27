@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <h2>Главная страница</h2>
-    <h4>Добро пожаловать в мой блог</h4>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="leftcolumn">
+    {% for event in events %}
+            <div class="card">
+              <h2>{{ event.title }}</h2>
+              <h5>{{ event.description }}, {{ event.date }}</h5>
+              <div class="fakeimg" style="height:200px;">Image</div>
+              <p>{{ event.content }} </p>
+            </div>
+    {% endfor %}
+ </div>
+{% endblock %}

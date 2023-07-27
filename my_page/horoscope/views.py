@@ -45,18 +45,25 @@ zodiac_dates = {
 
 
 # Create your views here.
+
 def index(request):
     zodiacs = list(zodiac_dict)
-    li_elements = ''
-    for sign in zodiacs:
-        redirect_path = reverse('horoscope_name', args=[sign])
-        li_elements += f'<li> <a href="{redirect_path}"> {sign.title()} </a> </li>'
-    response = f"""
-    <ol>
-        {li_elements}
-    </ol>
-    """
-    return HttpResponse(response)
+   # f'<li> <a href="{redirect_path}"> {sign.title()} </a> </li>'
+    context = {
+        'zodiacs': zodiacs,
+        'zodiac_dict': zodiac_dict
+    }
+    return render(request, 'horoscope/index.html', context=context)
+    # li_elements = ''
+    # for sign in zodiacs:
+    #     redirect_path = reverse('horoscope_name', args=[sign])
+    #     li_elements += f'<li> <a href="{redirect_path}"> {sign.title()} </a> </li>'
+    # response = f"""
+    # <ol>
+    #     {li_elements}
+    # </ol>
+    # """
+    # return HttpResponse(response)
 
 @dataclass
 class Person:
@@ -69,20 +76,14 @@ class Person:
 
 def get_info_about_sign_zodiac(request, sign_zodiac):
     description = zodiac_dict.get(sign_zodiac)
+    zodiacs = list(zodiac_dict)
     data = {
         'description': description,
         'sign': sign_zodiac.title(),
-        'my_int': 111,
-        'my_float': 111.5,
-        'my_list': [1, 2, 3],
-        'my_tuple': (1, 2, 3, 4, 5),
-        'my_dict': {'name': 'Jack', 'age': 40},
-        'my_class': Person('Will', 55)
+        'zodiacs': zodiacs
     }
     # response = render_to_string('horoscope/info_zodiac.html')
     return render(request, 'horoscope/info_zodiac.html', context=data)
-
-
 
 def get_info_about_sign_zodiac_by_number(request, sign_zodiac: int):
     zodiacs = list(zodiac_dict)

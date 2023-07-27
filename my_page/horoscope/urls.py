@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name='horoscope_index'),
     path('type/', views.get_znak),
     path('type/<str:type_name>/', views.type, name='type_names'),
     path('<int:month>/<int:day>', views.get_info_by_date),
