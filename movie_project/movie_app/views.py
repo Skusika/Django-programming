@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from .models import Movie, Director, Actor
 from django.db.models import F, Sum, Max, Min, Count, Avg, Value
 
+from django.views.generic import ListView, DetailView
+
 # Create your views here.
 def show_all_movie(request):
     # movies = Movie.objects.order_by(F('year').asc(nulls_last=True), 'rating')
@@ -36,6 +38,14 @@ def show_directors(request):
         'directors': directors
     })
 
+class AllDirectors(ListView):
+    template_name = 'movie_app/all_directors.html'
+    model = Director
+    context_object_name = 'directors'
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
 def show_one_director(request, id_dir:int):
     director = get_object_or_404(Director, id=id_dir)
     return render(request, 'movie_app/one_director.html', {
@@ -50,8 +60,23 @@ def show_actors(request):
         'actors': actors
     })
 
+class AllActors(ListView):
+    template_name = 'movie_app/all_actors.html'
+    model = Actor
+    context_object_name = 'actors'
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
 def show_one_actor(request, id_act:int):
     actor = get_object_or_404(Actor, id=id_act)
     return render(request, 'movie_app/one_actor.html', {
         'actor': actor
     })
+
+class OneDirector(DetailView):
+    template_name = 'movie_app/one_director.html'
+    model = Director
+
+class OneActor(DetailView):
+    template_name = 'movie_app/one_actor.html'
+    model = Actor

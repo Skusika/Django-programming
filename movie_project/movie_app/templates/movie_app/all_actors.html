@@ -1,0 +1,20 @@
+{% extends 'movie_app/base.html' %}
+
+{% block title %} Список всех актеров {% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Пол</th>
+    </tr>
+    {% for item in actors %}
+    <tr>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
+        <td>{{ item.gender }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
