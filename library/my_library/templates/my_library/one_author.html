@@ -1,0 +1,16 @@
+{% extends 'my_library/base.html' %}
+
+{% block title %} Автор {% endblock %}
+
+ {% block content %}
+    <h3> Имя - {{ author.name }} </h3>
+    <h3> Дата рождения - {{ actor.date_birth }} </h3>
+    <h3> Биография - {{ author.biography }} </h3>
+    <hr>
+    <h3> Список книг </h3>
+    <ul>
+        {% for book in author.book_set.all %}
+        <li>{{ book }}</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}

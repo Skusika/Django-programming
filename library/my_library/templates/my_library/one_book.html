@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+{% extends 'my_library/base.html' %}
+
+{% block title %} Книга {% endblock %}
+
+ {% block content %}
+    <h3> Название - {{ book.title }} </h3>
+    <h3> Фамилия - {{ book.last_name }} </h3>
+    <h3> Пол - {{ book.gender }} </h3>
+    <hr>
+    <h3> Список книг </h3>
+    <ul>
+        {% for book in authors.book_set.all %}
+        <li>{{ book }}</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
